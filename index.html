@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Data-Driven Decision Making Podcast – DDDM.FM</title>
+  <meta name="description" content="Simplify data-driven decision making with clear, actionable advice. Insights from industry experts and real-world stories.">
+  <link rel="canonical" href="https://dddm.fm/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Data-Driven Decision Making Podcast – DDDM.FM">
+  <meta property="og:description" content="Simplify data-driven decision making with clear, actionable advice.">
+  <meta property="og:url" content="https://dddm.fm/">
+  <link rel="icon" href="assets/favicon-32.png" sizes="32x32">
+  <link rel="icon" href="assets/favicon-192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preload" href="assets/basiercircle-bold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="logo" href="/"><img src="assets/logo.png" width="750" height="125" alt="DDDM.FM – Data-Driven Decision Making Podcast"></a>
+      <nav>
+        <a href="https://www.linkedin.com/in/lukaszschab/">LinkedIn Profile</a>
+        <a href="https://www.youtube.com/@DDDM_FM">Episodes</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="hero">
+    <div class="wrap">
+      <div>
+        <h1>What if you could simplify data-driven decision making with clear, actionable advice?</h1>
+        <p class="lead">Implement data-driven decision-making without feeling overwhelmed by the complexity and multifaceted nature of DDDM. Gain insights from industry experts and real-world stories without spending time and resources on extensive research and trial and error.</p>
+        <a class="episodes" href="https://www.youtube.com/@DDDM_FM" target="_blank" rel="noopener">or check previous episodes</a>
+      </div>
+
+      <section class="newsletter" aria-labelledby="nl-title">
+        <h2 id="nl-title">Free DDDM.FM Podcast Newsletter</h2>
+        <p>Subscribe to our newsletter to get the latest episode each week plus exclusive updates!</p>
+        <p>Discover data-driven journeys with insider advice, advanced techniques, and recommended tools.</p>
+        <!-- Kit (ConvertKit) form 7572705, same list the WordPress site used -->
+        <form id="signup" action="https://app.convertkit.com/forms/7572705/subscriptions" method="post">
+          <input id="email" type="email" name="email_address" placeholder="Email Address" aria-label="Email Address" autocomplete="email" required>
+          <button type="submit">Try it</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>
+        <p class="label">© DDDM.FM</p>
+        <ul>
+          <li><a href="/privacy-policy/">Privacy Policy</a></li>
+          <li><a href="/terms-and-conditions/">Terms and Conditions</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="label">Listen on:</p>
+        <ul>
+          <li><a href="https://www.youtube.com/@DDDM_FM">YouTube</a></li>
+          <li><a href="https://www.linkedin.com/in/lukaszschab/">LinkedIn Lukasz Schab</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Submit to Kit in the background and show the result inline.
+    // Without JS the form still posts normally to Kit's hosted confirmation page.
+    const form = document.getElementById('signup');
+    const status = form.querySelector('.form-status');
+    const button = form.querySelector('button');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      button.disabled = true;
+      status.textContent = '';
+      let data;
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: new FormData(form)
+        });
+        data = await res.json();
+      } catch {
+        form.submit();
+        return;
+      } finally {
+        button.disabled = false;
+      }
+      if (data.status === 'failed') {
+        status.textContent = 'Something went wrong. Please check your email address and try again.';
+      } else {
+        form.reset();
+        status.textContent = 'Thanks! Check your inbox to confirm your subscription.';
+      }
+    });
+  </script>
+</body>
+</html>
